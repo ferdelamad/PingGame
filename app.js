@@ -14,6 +14,7 @@ var counterSix = 0;
 init();
 
 var dicePic = document.querySelector('.dice');
+var typedScore = document.querySelector('.inputScore')
 
 document.querySelector(".btn-roll").addEventListener('click', function() {
   if (gamePlaying) {
@@ -54,8 +55,13 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
     roundScore = 0;
 
+    //Get the input value that the user typed
+    input = typedScore.value
+    //If the user does not set any value, winner score = 50, else convert the input into a Number
+    !input ? input = 50 : input = Number(typedScore.value);
+
     //Check if player won
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= input) {
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!'
       dicePic.style.display = 'none';
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');

@@ -2,6 +2,22 @@
 *** GENERAL
 **********************************************/
 
+.inputScore {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 500px;
+  color: #8b287b;
+  font-size: 18px;
+  font-family: "Lato";
+  text-align: center;
+  padding: 10px;
+  width: 160px;
+  text-transform: uppercase;
+}
+
+.inputeScore:focus { outline: none;}
+
 * {
     margin: 0;
     padding: 0;
