@@ -8,41 +8,33 @@ GAME RULES:
 */
 var scores, roundScore, activePlayer, gamePlaying;
 
-var lastDice;
-var counterSix = 0;
+var dicePic1 = document.getElementById('dice1')
+var dicePic2 = document.getElementById('dice2')
+var typedScore = document.querySelector('.inputScore')
 //Start the Game
 init();
 
-var dicePic = document.querySelector('.dice');
-var typedScore = document.querySelector('.inputScore')
 
 document.querySelector(".btn-roll").addEventListener('click', function() {
   if (gamePlaying) {
     //1.- We need a random number from 1 to 6
     var dice = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
 
     //2.- We need to display the result (dice) randomly with each click
-    dicePic.style.display = 'unset';
-    dicePic.src = 'dice-' + dice + '.png';
+    dicePic1.style.display = 'unset';
+    dicePic2.style.display = 'unset';
+    dicePic1.src = 'dice-' + dice + '.png';
+    dicePic2.src = 'dice-' + dice2 + '.png';
 
-    if (dice === 6 && lastDice === 6) {
-      console.log('You got a second 6 =/')
-      scores[activePlayer] = 0;
-      document.getElementById('score-' + activePlayer).textContent = 0;
-      nextPlayer();
-    } else if (dice !== 1) { //3.- Update the Round score IF the number is NOT a 1
+    if (dice !== 1 && dice2 !== 1) { //3.- Update the Round score IF the number is NOT a 1
       //add score
-      if (dice === 6) {
-        console.log('You got one 6 wath out for the second one!')
-        counterSix++;
-      }
-      roundScore += dice
+      roundScore += (dice + dice2);
       document.querySelector('#current-' + activePlayer).textContent = roundScore;
     } else {
       //next player
     nextPlayer();
     }
-    lastDice = dice;
   }
 });
 
@@ -58,12 +50,13 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     //Get the input value that the user typed
     input = typedScore.value
     //If the user does not set any value, winner score = 50, else convert the input into a Number
-    !input ? input = 50 : input = Number(typedScore.value);
+    !input ? input = 100 : input = Number(typedScore.value);
 
     //Check if player won
     if (scores[activePlayer] >= input) {
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!'
-      dicePic.style.display = 'none';
+      dicePic1.style.display = 'none';
+      dicePic2.style.display = 'none';
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
       document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
       gamePlaying = false;
@@ -80,13 +73,12 @@ document.querySelector('.btn-new').addEventListener('click', init);
 function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0;
-  lastDice = 0;
-  counterSix = 0;
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
   document.querySelector('.player-0-panel').classList.toggle('active');
   document.querySelector('.player-1-panel').classList.toggle('active');
-  dicePic.style.display = 'none';
+  dicePic1.style.display = 'none';
+  dicePic2.style.display = 'none';
 }
 
 function init() {
@@ -94,7 +86,8 @@ function init() {
   roundScore = 0;
   activePlayer = 0;
   gamePlaying = true;
-  document.querySelector(".dice").style.display = 'none';
+  dicePic1.style.display = 'none';
+  dicePic2.style.display = 'none';
   //set scores and current scores to 0
   document.getElementById('score-0').textContent = '0';
   document.getElementById('score-1').textContent = '0';

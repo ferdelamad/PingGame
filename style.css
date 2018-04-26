@@ -25,6 +25,9 @@
 
 }
 
+#dice1 { top: 120px }
+#dice2 { top: 250px }
+
 .clearfix::after {
     content: "";
     display: table;
