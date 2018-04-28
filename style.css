@@ -2,6 +2,9 @@
 *** GENERAL
 **********************************************/
 
+/**********************************************
+*** Input Score
+**********************************************/
 .inputScore {
   position: absolute;
   left: 50%;
@@ -24,9 +27,6 @@
     box-sizing: border-box;
 
 }
-
-#dice1 { top: 120px }
-#dice2 { top: 250px }
 
 .clearfix::after {
     content: "";
@@ -161,6 +161,9 @@ i {
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+
+#dice1 { top: 120px }
+#dice2 { top: 250px }
 
 .dice {
     position: absolute;
